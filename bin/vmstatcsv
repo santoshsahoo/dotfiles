@@ -1,0 +1,5 @@
+#!/bin/sh
+vmstat -n 1 | while read line
+do
+  echo "$(date +%s),$(echo $line | awk -F "" '{gsub(/  */,",",$0); print $0}')"
+done
