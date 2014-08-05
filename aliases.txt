@@ -22,7 +22,7 @@ alias gf3='gf -n 3'
 alias gf4='gf -n 4'
 alias gf5='gf -n 5'
 alias gg='gl --decorate --oneline --graph --date-order --all'
-alias gl='git log'
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gm='git commit -m'
 alias gma='git commit -am'
 alias gp='git push'
@@ -58,6 +58,13 @@ alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias whois='whois -h whois-servers.net'
 alias z='_z 2>&1'
 alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io rm $id; done'
-alias rmidocker='sudo docker.io images | awk '"'"'$1 == "<none>" {print $3}'"'"' | while read id; do sudo docker.io rmi $id; done'
 alias docker='sudo docker.io'
 alias dps='sudo docker.io ps -a'
+
+function rmidocker(){
+    sudo docker.io images | awk '"'"'$1 == "<none>" {print $3}'"'"' | while read id; do sudo docker.io rmi $id; done
+}
+
+function gitsetauthor(){
+    git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Santosh Sahoo'; GIT_AUTHOR_EMAIL='me@santoshsahoo.com'; GIT_COMMITTER_NAME='Santosh Sahoo'; GIT_COMMITTER_EMAIL='me@santoshsahoo.com';" HEAD
+}
