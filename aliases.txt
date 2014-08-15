@@ -68,3 +68,5 @@ function rmidocker(){
 function gitsetauthor(){
     git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Santosh Sahoo'; GIT_AUTHOR_EMAIL='me@santoshsahoo.com'; GIT_COMMITTER_NAME='Santosh Sahoo'; GIT_COMMITTER_EMAIL='me@santoshsahoo.com';" HEAD
 }
+
+alias sa='scss --trace --watch sass:www/static/css'
