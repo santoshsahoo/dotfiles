@@ -61,8 +61,8 @@ alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io 
 alias docker='sudo docker.io'
 alias dps='sudo docker.io ps -a'
 
-function rmidocker(){
-    sudo docker.io images | awk '"'"'$1 == "<none>" {print $3}'"'"' | while read id; do sudo docker.io rmi $id; done
+function dockerclean(){
+    sudo docker.io images | awk '$1 == "<none>" {print $3}' | while read id; do sudo docker.io rmi $id; done
 }
 
 function gitsetauthor(){
