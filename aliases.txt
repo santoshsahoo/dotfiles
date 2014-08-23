@@ -1,11 +1,26 @@
-#alias '-'='cd -'
+alias c='clear'
+alias cd..='cd ..'
 alias ..='cd ..'
-alias ...='cd ../..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+alias mkdir='mkdir -pv'
+alias h='history'
+alias j='jobs -l'
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T'
+alias nowtime=now
+alias nowdate='date +"%d-%m-%Y"'
+
 alias df='df -h'
 alias dsstore='find . -name '\''*.DS_Store'\'' -type f -ls -delete'
 alias eachdir='. eachdir'
 alias flush='dscacheutil -flushcache'
 alias fs='stat -f '\''%z bytes'\'''
+
+#git stuff
 alias g='git'
 alias gb='git branch'
 alias gba='git branch -a'
@@ -36,12 +51,15 @@ alias gs-all='eachdir git status'
 alias gst='gs'
 alias gu='git pull'
 alias gu-all='eachdir git pull'
-alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
-alias install='sudo apt-get install'
+function gsauthor(){ 
+	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='$1'; GIT_AUTHOR_EMAIL='$2'; GIT_COMMITTER_NAME='$1'; GIT_COMMITTER_EMAIL='$1';" HEAD
+}
+
 alias ls='command ls -G'
 alias ll='ls -la -G'
 alias lsd='ll -d'
 alias l='tree --dirsfirst -C -L 2'
+
 alias nave_stable='nave use default stable nave_stable_2 $(node --version 2>/dev/null); src'
 alias npm_link='rm -rf node_modules; npm install; linken . --src ..'
 alias npm_link_grunt='linken . --src ~/gruntjs'
@@ -51,22 +69,42 @@ alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]
 alias q='nano -w -z'
 alias q.='q .'
 alias r='fc -s'
+alias z='_z 2>&1'
+
+# apt
+alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias search='apt-cache search'
 alias update='sudo apt-get -qq update && sudo apt-get upgrade'
-alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias whois='whois -h whois-servers.net'
-alias z='_z 2>&1'
+
+# docker
 alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io rm $id; done'
 alias docker='sudo docker.io'
 alias dps='sudo docker.io ps -a'
-
-function dockerclean(){
-    sudo docker.io images | awk '$1 == "<none>" {print $3}' | while read id; do sudo docker.io rmi $id; done
+function dclean(){
+	sudo docker.io images | awk '$1 == "<none>" {print $3}' | while read id; do sudo docker.io rmi $id; done
 }
 
-function gitsetauthor(){
-    git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Santosh Sahoo'; GIT_AUTHOR_EMAIL='me@santoshsahoo.com'; GIT_COMMITTER_NAME='Santosh Sahoo'; GIT_COMMITTER_EMAIL='me@santoshsahoo.com';" HEAD
-}
+# networking
+alias ipt='sudo /sbin/iptables'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias firewall=iptlist
+
+alias ping='ping -c 5'
+alias fastping='ping -c 100 -s.2'
+alias ports='netstat -tulanp'
+alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
+
+alias header='curl -I'
+alias headerc='curl -I --compress'
+alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
+
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias whois='whois -h whois-servers.net'
+
+# SASS
 
 alias sa='scss --trace --watch sass:www/static/css'
