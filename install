@@ -1,0 +1,12 @@
+mv ~/.bashrc ~/.bashrc-backup
+DIR=`dirname "$0"`
+touch "${HOME}/.bashrc-local"
+
+cat > ~/.bashrc << EOF
+source $DIR/bash-variables
+source $DIR/bash-aliases
+source $DIR/bash-prompt
+source "${HOME}/.bashrc-local"
+EOF
+
+source ~/.bashrc

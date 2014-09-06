@@ -1,2 +1,0 @@
-export PATH=$PATH:~/mydotfiles/bin:~/apache-maven-3.2.2/bin/:~/gradle-2.0/bin
-export JAVA_HOME=/usr/lib/jvm/default-java/jre
