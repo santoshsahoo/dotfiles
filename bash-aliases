@@ -22,6 +22,7 @@ alias fs='stat -f '\''%z bytes'\'''
 
 #git stuff
 alias g='git'
+alias ga='git add --all'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gbc='gc -b'
@@ -29,13 +30,8 @@ alias gcb='gc -b'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
 alias gcl='git clone'
 alias gco='gc'
-alias gd='git diff'
-alias gdc='gd --cached'
-alias gf1='gf -n 1'
-alias gf2='gf -n 2'
-alias gf3='gf -n 3'
-alias gf4='gf -n 4'
-alias gf5='gf -n 5'
+alias gd='git diff --color'
+alias gdc='gd --cached'qq
 alias gg='gl --decorate --oneline --graph --date-order --all'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gm='git commit -m'
@@ -51,17 +47,19 @@ alias gs-all='eachdir git status'
 alias gst='gs'
 alias gu='git pull'
 alias gu-all='eachdir git pull'
+alias gac='git add -A && git commit -a -m'
+
 function gsauthor(){ 
 	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='$1'; GIT_AUTHOR_EMAIL='$2'; GIT_COMMITTER_NAME='$1'; GIT_COMMITTER_EMAIL='$1';" HEAD
 }
 
 if [ "$(uname)" == "Darwin" ]; then
     alias ls='command ls -G'
-    alias ll='ls -la -G'
 else
     alias ls='command ls --color'
-    alias ll='ls -la --color'
 fi
+alias ll='ls -l'
+alias la='ls -la'
 alias lsd='ll -d'
 alias l='tree --dirsfirst -C -L 2'
 
@@ -81,6 +79,7 @@ alias install='sudo apt-get install'
 alias remove='sudo apt-get remove'
 alias search='apt-cache search'
 alias update='sudo apt-get -qq update && sudo apt-get upgrade'
+alias updaty='update -yqq'
 
 # docker
 alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io rm $id; done'
@@ -113,3 +112,10 @@ alias whois='whois -h whois-servers.net'
 # SASS
 
 alias sa='scss --trace --watch sass:www/static/css'
+
+# vagrant
+alias vssh='vagrant ssh'
+alias vst='vagrant status'
+alias vup='vagrant up'
+alias vinit='vagrant init --minimal'
+alias vhalt='vagrant halt'
