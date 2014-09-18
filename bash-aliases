@@ -28,8 +28,8 @@ alias gba='git branch -a'
 alias gbc='gc -b'
 alias gcb='gc -b'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
-alias gcl='git clone'
-alias gco='gc'
+alias gc='git clone'
+alias gc1='gc --depth 0'
 alias gd='git diff --color'
 alias gdc='gd --cached'qq
 alias gg='gl --decorate --oneline --graph --date-order --all'
@@ -58,8 +58,8 @@ if [ "$(uname)" == "Darwin" ]; then
 else
     alias ls='command ls --color'
 fi
-alias ll='ls -l'
-alias la='ls -la'
+alias ll='ls -lh'
+alias la='ls -lah'
 alias lsd='ll -d'
 alias l='tree --dirsfirst -C -L 2'
 
