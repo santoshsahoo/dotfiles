@@ -1,7 +1,7 @@
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-mv ~/.bashrc ~/bashrc.backup
-mv ~/.vimrc ~/vimrc.backup
+if [ -f ~/.vimrc ]; then mv ~/.bashrc ~/bashrc.backup; fi
+if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/vimrc.backup; fi
 
 touch "${HOME}/.bashrc-local"
 
@@ -13,6 +13,6 @@ source ${HOME}/.bashrc-local
 EOF
 
 
-if [ -f ~/.vimrc ]; then ln -s ${DIR}/vimrc ${HOME}/.vimrc; fi
+ln -s ${DIR}/vimrc ${HOME}/.vimrc
 
 source ~/.bashrc
