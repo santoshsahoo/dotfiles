@@ -12,6 +12,7 @@ source ${DIR}/bash-prompt
 source ${HOME}/.bashrc-local
 EOF
 
-ln -s ${DIR}/vimrc ${HOME}/.vimrc
+
+if [ -f ~/.vimrc ]; then ln -s ${DIR}/vimrc ${HOME}/.vimrc; fi
 
 source ~/.bashrc

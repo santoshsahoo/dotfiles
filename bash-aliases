@@ -99,7 +99,7 @@ alias firewall=iptlist
 
 alias ping='ping -c 5'
 alias fastping='ping -c 100 -s.2'
-alias ports='netstat -tulanp'
+alias ports='sudo netstat -tulanp'
 alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
 
 alias header='curl -I'
