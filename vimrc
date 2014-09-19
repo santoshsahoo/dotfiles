@@ -35,3 +35,4 @@ map <S-Tab> gt
 "-- Tweaks --
 "Add tweak for better backspace support
 set backspace=indent,eol,start
+syntax on

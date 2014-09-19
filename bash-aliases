@@ -30,7 +30,7 @@ alias gcb='gc -b'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
 alias gc='git clone'
 alias gc1='gc --depth 0'
-alias gd='git diff --color'
+alias gd='git diff --color --minimal'
 alias gdc='gd --cached'
 alias gg='gl --decorate --oneline --graph --date-order --all'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -58,9 +58,8 @@ if [ "$(uname)" == "Darwin" ]; then
 else
     alias ls='command ls --color'
 fi
-alias ll='ls -lh'
-alias la='ls -lah'
-alias lsd='ll -d'
+alias ll='ls -lhF'
+alias la='ls -lahF'
 alias l='tree --dirsfirst -C -L 2'
 
 alias nave_stable='nave use default stable nave_stable_2 $(node --version 2>/dev/null); src'
