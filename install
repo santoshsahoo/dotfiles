@@ -2,6 +2,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 if [ -f ~/.vimrc ]; then mv ~/.bashrc ~/bashrc.backup; fi
 if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/vimrc.backup; fi
+ln -s $DIR/LS_Colors ~/.lscolors 
 
 touch "${HOME}/.bashrc-local"
 
@@ -9,9 +10,10 @@ cat > ~/.bashrc << EOF
 source ${DIR}/bash-variables
 source ${DIR}/bash-aliases
 source ${DIR}/bash-prompt
-source ${HOME}/.bashrc-local
+source ~/.bashrc-local
 EOF
 
+echo 'eval $(dircolors -b ~/.lscolors)' >> ~/.bashrc
 
 ln -s ${DIR}/vimrc ${HOME}/.vimrc
 
