@@ -73,6 +73,7 @@ alias q.='q .'
 alias r='fc -s'
 alias z='_z 2>&1'
 alias brc='source ~/.bashrc'
+alias p='readlink -f'
 
 # apt
 alias install='sudo apt-get install'
@@ -85,8 +86,11 @@ alias updaty='update -yqq'
 alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io rm $id; done'
 alias docker='sudo docker.io'
 alias dps='sudo docker.io ps -a'
+
 function dclean(){
-	sudo docker.io images | awk '$1 == "<none>" {print $3}' | while read id; do sudo docker.io rmi $id; done
+	sudo docker.io images \
+	| awk '$1 == "<none>" {print $3}' \
+	| while read id; do sudo docker.io rmi $id; done
 }
 
 # networking
