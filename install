@@ -1,22 +1,15 @@
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+#!/bin/sh
+
+DOTFILES_HOME="$( cd "$( dirname "$0" )" && pwd )"
 
 # if [ -f ~/.vimrc ]; then mv ~/.bashrc ~/bashrc.backup; fi
 # if [ -f ~/.vimrc ]; then mv ~/.vimrc ~/vimrc.backup; fi
 
 touch "${HOME}/.bashrc-local"
 
-cat > ~/.bashrc << EOF
-source ${DIR}/bash-variables
-source ${DIR}/bash-aliases
-source ${DIR}/bash-prompt
-source ~/.bashrc-local
-EOF
+echo "export DOTFILES_HOME='$DOTFILES_HOME'" > ~/.bashrc
+cat $DOTFILES_HOME/bashrc >> ~/.bashrc
 
-if [ "$(uname)" == "Linux" ]; then
-    ln -fs $DIR/LS_Colors ~/.lscolors 
-    echo 'eval $(dircolors -b ~/.lscolors)' >> ~/.bashrc
-fi
+ln -s -f $DOTFILES_HOME/vimrc ~/.vimrc
 
-ln -fs ${DIR}/vimrc ${HOME}/.vimrc
-
-source ~/.bashrc
+echo "Run '. ~/.bashrc' to update the changes."

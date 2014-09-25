@@ -1,4 +1,8 @@
-export PATH=$PATH:~/dotfiles/bin:~/bin:~/lib/apache-maven-3.2.2/bin/:~/lib/gradle-2.0/bin
+export PATH=$PATH:~/bin:~/local/maven/bin/:~/local/gradle/bin:$DOTFILES_HOME/bin
+
 if [ -d /usr/lib/jvm/default-java/jre ]; then
   export JAVA_HOME=/usr/lib/jvm/default-java/jre; 
 fi
+
+export CDPATH=.:~
+
