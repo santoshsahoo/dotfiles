@@ -4,5 +4,5 @@ if [ -d /usr/lib/jvm/default-java/jre ]; then
   export JAVA_HOME=/usr/lib/jvm/default-java/jre; 
 fi
 
-export CDPATH=.:~
+export CDPATH=.:~:/
 

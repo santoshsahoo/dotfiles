@@ -1,4 +1,5 @@
 alias c='clear'
+alias cd.='cd $HOME'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -76,11 +77,12 @@ alias brc='source ~/.bashrc'
 alias p='readlink -f'
 
 # apt
-alias install='sudo apt-get install'
-alias remove='sudo apt-get remove'
+alias install='sudo apt-get -y --no-install-recommends install'
+alias remove='sudo apt-get -y remove'
 alias search='apt-cache search'
-alias update='sudo apt-get -qq update && sudo apt-get upgrade'
+alias update='sudo apt-get -qq update && sudo apt-get upgrade --just-print'
 alias updaty='update -yqq'
+alias aptclean='sudo apt-get autoremove && sudo apt-get autoclean'
 
 # docker
 alias rmdocker='sudo docker.io ps -a --quiet | while read id; do sudo docker.io rm $id; done'
@@ -106,13 +108,16 @@ alias fastping='ping -c 100 -s.2'
 alias ports='sudo netstat -tulanp'
 alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
 
-alias header='curl -I'
-alias headerc='curl -I --compress'
+UA='Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
+alias header='curl -A "$UA" -I'
+alias get='curl -i -A "$UA"'
 alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
 
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias whois='whois -h whois-servers.net'
-alias ip4='dig +short'
+alias ipof='dig +short'
+alias nsof='dig +short NS'
+alias anyof='dig any'
 
 # SASS
 
