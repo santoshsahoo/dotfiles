@@ -1,5 +1,6 @@
 alias c='clear'
-alias cd.='cd $HOME'
+
+alias cd.='cd ~'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -7,6 +8,14 @@ alias ....='cd ../../../../'
 alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
+
+alias pd=pushd
+alias pd.='pd ~'
+alias pd..='pd ..'
+alias pd3='pd ../../../'
+alias pd4='pd ../../../../'
+alias pd5='pd ../../../../..'
+
 alias mkdir='mkdir -pv'
 alias h='history'
 alias j='jobs -l'
@@ -78,10 +87,9 @@ alias p='readlink -f'
 
 # apt
 alias install='sudo apt-get -y --no-install-recommends install'
-alias remove='sudo apt-get -y remove'
+alias remove='sudo apt-get -qq remove'
 alias search='apt-cache search'
-alias update='sudo apt-get -qq update && sudo apt-get upgrade --just-print'
-alias updaty='update -yqq'
+alias update='sudo apt-get -qq update && sudo apt-get upgrade'
 alias aptclean='sudo apt-get autoremove && sudo apt-get autoclean'
 
 # docker
