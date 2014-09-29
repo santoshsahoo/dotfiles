@@ -4,6 +4,6 @@ mydotfiles
 My simple dotfiles for bash
 
 ##Install
-git clone https://github.com/santoshsahoo/dotfiles.git
+git clone https://github.com/santoshsahoo/dotfiles
 
-source ~/dotfiles/install.sh
+dotfiles/install

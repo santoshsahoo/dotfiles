@@ -40,7 +40,7 @@ alias gcb='gc -b'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
 alias gc='git clone'
 alias gc1='gc --depth 0'
-alias gd='git diff --color --minimal'
+alias gd='cdiff.py -s -w0 -l'
 alias gdc='gd --cached'
 alias gg='gl --decorate --oneline --graph --date-order --all'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -58,6 +58,7 @@ alias gst='gs'
 alias gu='git pull'
 alias gu-all='eachdir git pull'
 alias gac='git add -A && git commit -a -m'
+alias cdiff='cdiff.py -s -w 0'
 
 function gsauthor(){ 
 	git filter-branch -f --env-filter "GIT_AUTHOR_NAME='$1'; GIT_AUTHOR_EMAIL='$2'; GIT_COMMITTER_NAME='$1'; GIT_COMMITTER_EMAIL='$1';" HEAD
@@ -86,7 +87,7 @@ alias brc='source ~/.bashrc'
 alias p='readlink -f'
 
 # apt
-alias install='sudo apt-get -y --no-install-recommends install'
+alias install='sudo apt-get --no-install-recommends install'
 alias remove='sudo apt-get -qq remove'
 alias search='apt-cache search'
 alias update='sudo apt-get -qq update && sudo apt-get upgrade'
