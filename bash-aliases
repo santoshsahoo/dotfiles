@@ -123,7 +123,6 @@ alias get='curl -i -A "$UA"'
 alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
 
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias whois='whois -h whois-servers.net'
 alias ipof='dig +short'
 alias nsof='dig +short NS'
 alias anyof='dig any'
@@ -159,7 +158,6 @@ alias cpuinfo='lscpu'
  
 ## get GPU ram on desktop / laptop## 
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-## pass options to free ## 
 alias meminfo='free -m -l -t'
  
 ## get top process eating memory
@@ -172,9 +170,7 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
  
 ## Get server cpu info ##
 alias cpuinfo='lscpu'
- 
-## older system use /proc/cpuinfo ##
-##alias cpuinfo='less /proc/cpuinfo' ##
- 
-## get GPU ram on desktop / laptop## 
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+# Data science
+alias pydata='/usr/bin/env PYTHONSTARTUP=$DOTFILES_HOME/pydata.py python'

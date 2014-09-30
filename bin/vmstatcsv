@@ -1,5 +1,8 @@
 #!/bin/sh
 vmstat -n 1 | while read line
 do
-  echo "$(date +%s),$(echo $line | awk -F "" '{gsub(/  */,",",$0); print $0}')"
+	if [ "$HEAD" = "1" ]; then 
+   		echo "$(date +%s),$(echo $line | awk -F "" '{gsub(/  */,",",$0); print $0}')"
+   	fi
+   	HEAD=1
 done
