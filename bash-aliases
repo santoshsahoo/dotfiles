@@ -127,6 +127,7 @@ alias ipof='dig +short'
 alias nsof='dig +short NS'
 alias anyof='dig any'
 
+
 # SASS
 
 alias sa='scss --trace --watch sass:www/static/css'
@@ -174,3 +175,10 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 
 # Data science
 alias pydata='/usr/bin/env PYTHONSTARTUP=$DOTFILES_HOME/pydata.py python'
+
+function sslprintcert(){ 
+	openssl s_client -showcerts -connect $1 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'
+}
+
+alias sshpubkey='cat ~/.ssh/id_rsa.pub'
+function sshcopykey(){ ssh $1 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub; }

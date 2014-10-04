@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- used to describe a textual explanation of parent -->
+	<description>This is Hello World Application</description>
+
+	<!-- provides a user-friendly name for an application e.g. used in error reports -->
+	<display-name>Hello World Web Application</display-name> 
+
+	<!-- used to reference an image to display to user e.g shopping cart -->
+	<icon>
+		<!-- both child elements are optional i.e. *, images should be GIF or JPEG as java.io is used to load the images -->
+		<!-- a small image 16x16-->
+		<small-icon>helloSmallIcon.GIF</small-icon>
+		<!-- a large image 32x32-->
+		<large-icon>helloLargeIcon.JPEG</large-icon>
+	</icon>
+
+
+	<!-- if present marks the application suitable for deployment across distributed network -->
+	<distributable />
+
+	<!-- describes application scoped initialization parameters -->
+	<context-param>
+		<description>My Context Values</description>
+		<!-- name of context parameter -->
+		<param-name>admin_email</param-name>
+		<!-- value of context parameter -->
+		<param-value>webadmin@mydomain.in</param-value>
+	</context-param>
+
+	<!-- to configure a filter -->
+	<filter>
+		<description>filterDesc</description>
+		<display-name>filterDisplayName</display-name>
+		<icon>
+			<small-icon>filterSmallIcon</small-icon>
+			<large-icon>filterlargeicon</large-icon>
+		</icon>
+
+		<!-- logical name of filter -->
+		<filter-name>myFilter</filter-name>
+		<!-- fully qulaified class name of filter -->
+		<filter-class>my.class.filter</filter-class>
+		<!-- filter specific initialization parameter -->
+		<init-param>
+			<!-- filter init param name -->
+			<param-name>paramFilterName</param-name>
+			<!-- filter init param value -->
+			<param-value>paramFilterVal</param-value>
+		</init-param>
+	</filter>
+
+	<!-- defines relationship of filter with the requests they serve -->
+	<filter-mapping>
+		<!-- should map to the logical name in <filter> -->
+		<filter-name>myFilter</filter-name>
+		<!-- filter is invloked if this servlet is executed, name is logical name of servlet -->
+		<servlet-name>myServlet</servlet-name>
+		<!-- maps filter to be invoked if particluar URL or URL pattern is encountered -->
+		<!--or <url-pattern>/myURL/*</url-pattern> -->
+		<!-- causes filter to be invoked as a result of
+		RequestDispatcher.forward() -->
+		<dispatcher>FORWARD</dispatcher>
+		<!-- causes filter to be invoked as a result of
+		RequestDispatcher.include() -->
+		<dispatcher>INCLUDE</dispatcher>
+		<!-- filter will impose its services only during
+		normal call to given path/servlet -->
+		<dispatcher>REQUEST</dispatcher>
+		<!-- the filter is applied in an error situation -->
+		<dispatcher>ERROR</dispatcher>
+		<!-- if no dispatcher elements are declared, conatiner
+		defaults to apply only on RREQUESTS -->
+	</filter-mapping>
+
+
+
+
+	<!-- registers the listener class for the application -->
+	<listener>
+		<description>myListenerDesc</description>
+		<display-name>myListener Display Name</display-name>
+		<icon>
+			<small-icon>myListenerSmallIcon.GIF</small-icon>
+			<large-icon>myListenerLargeIcon.GIF</large-icon>
+		</icon>
+		<!-- fully qualified name of listener class and
+		should be in /WEB-INF/classes/ or /WEB-INF/lib/ -->
+		<listener-class>com.class.myListener</listener-class>
+	</listener>
+
+
+
+
+<!-- servlet pertaining details -->
+<servlet>
+	<description>servlet desc</description>
+	<display-name>servlet disp name</display-name>
+	<icon>
+		<small-icon>servletSmallIcon.GIF</small-icon>
+		<large-icon>servletLargeIcon.GIF</large-icon>
+	</icon>
+
+
+	<!-- declares the logical name of the servlet -->
+	<servlet-name>myServlet</servlet-name>
+	<!-- fully qualified name of the servlet class
+	or context relative location of JSP -->
+	<servlet-class>com.class.myServlet</servlet-class>
+	<!-- <jsp-file>myJspFile.jsp</jsp-file> -->
+
+
+	<!-- servlet init parameters -->
+	<init-param>
+		<!-- servlet init param name -->
+		<param-name>servletParamName</param-name>
+		<!-- servlet init param value -->
+		<param-value>servletParamvalue</param-value>
+	</init-param>
+
+
+	<!-- specifies when the servlet is instantiated and i
+	nitialised during applivation lifetime
+	servlets with +ve lower values are loaded
+	before servlets with higer +ve values
+	a negative value or absence of element
+	or same value for two different servlets
+	lets the container at it's will laod the
+	servlet when required -->
+	<load-on-startup>0</load-on-startup> <!-- ? -->
+
+
+	<!-- describes the security role this servlet
+	will take if invoking an EJB -->
+	<run-as>
+		<description>run as desc</description>
+		<role-name>myRole</role-name>
+	</run-as>
+
+
+	<!-- maps the roles as used in servlet code by
+	programmer to actual role on server -->
+	<security-role-ref>
+		<description>security rolse desc</description>
+		<!-- declares the role name as it appears in servlet code -->
+		<role-name>myRole</role-name>
+	<!-- specifies associated role name as found
+	in the server environment -->
+	<role-link>myRole</role-link>
+</security-role-ref>
+</servlet>
+
+
+
+
+<!-- maps the servlets to requests they serve -->
+<servlet-mapping>
+	<!-- logical name of servlet as in <servlet> -->
+	<servlet-name>myServlet</servlet-name>
+	<!-- the URL pattern which will invoke this servlet -->
+	<url-pattern>/myServlet/*</url-pattern>
+</servlet-mapping>
+
+
+
+
+<!-- configures session and only thing that can be done is timeout -->
+<session-config>
+	<!-- declares the timeout amount in minutes, -ve means
+	infinity and 0 means will expire
+	after current request-response, if omitted
+	container deault is taken -->
+	<session-timeout>-1</session-timeout> <!-- ? -->
+</session-config>
+
+
+
+
+<!-- describes the mime type for the set of files -->
+<mime-mapping>
+	<!-- file extension of group of files for which
+	mapping will be applied -->
+	<extension>*.jsp</extension>
+
+
+	<!-- declares the mime type which will be
+	associated with the given set of files -->
+	<mime-type>text/html</mime-type>
+</mime-mapping>
+
+
+
+
+	<!-- declares the lost of files which can be used as
+	welcome or landing page of the application
+	also in case of absence of mappings for a
+	resource these files are fed as response -->
+	<welcome-file-list>
+		<!-- name of the file to be used as welcome file -->
+		<welcome-file>index.jsp</welcome-file> <!-- + -->
+	</welcome-file-list>
+
+
+
+
+	<!-- provides mapping between errorr and their
+	corresponding resoures to be showed in case they occur -->
+	<error-page>
+		<!-- a valid HTTP error code -->
+		<error-code>404</error-code>
+		<!-- a valid exception type -->
+	<!-- or
+	<exception-type>java.io.IOException</exception-type> 
+--><!-- 1 -->
+
+
+	<!-- resource to be displayed in case of above
+	defined error condition -->
+	<location>/error.jsp</location>
+</error-page>
+
+
+
+
+<!-- configures the details for JSPs -->
+<jsp-config>
+	<!-- used to specify the loaction of tag
+	library to be used by any JSPs in application-->
+	<taglib>
+		<!-- an absolute or relative URI -->
+		<taglib-uri>http://www.sun.com</taglib-uri>
+	<!-- context relative location of the TLD
+	for the refrenced library -->
+	<taglib-location>com.class.taglib</taglib-location>
+</taglib>
+
+
+<!-- configures the properties for the roup of jsps -->
+<jsp-property-group>
+	<description>jsp desc</description>
+	<display-name>jsp grp</display-name>
+	<icon>
+		<small-icon>smallJspIcon.gif</small-icon>
+		<large-icon>largeJspIcon.gif</large-icon>
+	</icon>
+
+
+	<!-- describes the request url pattern to
+	which all jsps in group conform
+	in simple terms which path the
+	group of jsps are found in -->
+	<url-pattern>/path/*</url-pattern>
+
+
+	<!-- used to disable expression language -->
+	<el-ignored>true</el-ignored> <!-- ? -->
+
+
+	<!-- informs conatiner about the caharacter
+	encoding use in jsps -->
+	<page-encoding>UTF-8</page-encoding> <!-- ? -->
+
+
+	<!-- used to disable java based coding in jsps -->
+	<scripting-invalid>true</scripting-invalid> <!-- ? -->
+
+
+	<!-- used to declare if the jsp group is jsp documents -->
+	<is-xml>false</is-xml> <!-- ? -->
+
+
+	<!-- decalres the header file to be included in jsps -->
+	<include-prelude>header.jsp</include-prelude>
+
+
+	<!-- declares the footer file to be included in jsps -->
+	<include-coda>footer.jsp</include-coda>
+</jsp-property-group>
+</jsp-config>
+
+
+
+	<!-- all authorisation and confidentiality
+	security requirements go here -->
+	<security-constraint>
+		<display-name>mySecurityName</display-name>
+
+		<!-- resource collections for which the
+		constraints apply go here -->
+		<web-resource-collection>
+		<!-- logical name of resource -->
+		<web-resource-name>myWebResource</web-resource-name>
+		<description>myWebDesc</description>
+		<!-- the url pattern to be checked for this
+		collection constraint,if request matches
+		the given constraints are imposed -->
+		<url-pattern>/*</url-pattern> <!-- ? -->
+		<!-- more tight constraint, check url + http method -->
+		<http-method>GET</http-method>
+		</web-resource-collection>
+
+		<!-- declares authorisation constraints -->
+		<auth-constraint> <!-- ? -->
+			<description>myAuthDesc</description>
+			<!-- specifies what roles are authorised for access,
+			* means access to all authenticated users -->
+			<role-name>myRole</role-name>
+		</auth-constraint>
+
+		<!-- specifies confidentiality and data integrity -->
+		<user-data-constraint>
+			<description>myUserDesc</description>
+			<!-- none means no security restrictions, integral means
+			data integrity is preserved by using digests
+			for each message, Confidential means complete
+			encryption is required on the channel-->
+			<transport-guarantee>
+				NONE or INTEGRAL or CONFIDENTIAL
+			</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	<!-- declares the authentication method used in the application ideally there should be only one element in DD-->
+	<login-config>
+		<!-- declares the authentication type being used -->
+		<auth-method>
+			BASIC or DIGEST or CLIENT-CERT or FORM
+		</auth-method>
+
+		<!-- a human-readable reminder string, used only in case of BASIC else can be skipped -->
+		<realm-name>restricted Zone</realm-name>
+
+		<!-- used in case of FORM authentication -->
+		<form-login-config>
+			<!-- context relative path of login page -->
+			<form-login-page>/login.jsp</form-login-page>
+			<!-- context relative path of error page if authentication fails -->
+			<form-error-page>/error.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<!-- declare the roles that exist is the application -->
+	<security-role>
+		<description>securityDesc</description>
+		<!-- the role name for the server -->
+		<role-name>myRole</role-name>
+	</security-role>
+
+</web-app>
