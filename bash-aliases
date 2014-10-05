@@ -1,3 +1,5 @@
+#!/bin/sh
+
 alias c='clear'
 
 alias cd.='cd ~'
@@ -40,7 +42,7 @@ alias gcb='gc -b'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
 alias gc='git clone'
 alias gc1='gc --depth 0'
-alias gd='cdiff.py -s -w0 -l'
+alias gd='cdiff.py -s -w0'
 alias gdc='gd --cached'
 alias gg='gl --decorate --oneline --graph --date-order --all'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -116,20 +118,36 @@ alias ping='ping -c 5'
 alias fastping='ping -c 100 -s.2'
 alias ports='sudo netstat -tulanp'
 alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
-
-UA='Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
-alias header='curl -A "$UA" -I'
-alias get='curl -i -A "$UA"'
-alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
-
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias ipof='dig +short'
 alias nsof='dig +short NS'
 alias anyof='dig any'
 
+IE9='Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; en-US))'
+alias header='curl -A "$IE9" -I'
+alias get='curl -i -A "$IE9"'
+alias httpdump='sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E "Host\: .*|GET \/.*"'
+alias prettyjson="python -c 'import json,sys;obj=json.load(sys.stdin);print json.dumps(obj, indent=1)'"
+function getjson(){ curl -sS -A "$IE9" "$@" | prettyjson;}
+
+## pass options to free ## 
+alias meminfo='free -m -l -t'
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+alias meminfo='free -m -l -t'
+
+# Openssl
+function sslprintcert(){ 
+	openssl s_client -showcerts -connect $1 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'
+}
+
+alias sshpubkey='cat ~/.ssh/id_rsa.pub'
+function sshcopykey(){ ssh $1 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub; }
 
 # SASS
-
 alias sa='scss --trace --watch sass:www/static/css'
 
 # vagrant
@@ -139,46 +157,5 @@ alias vup='vagrant up'
 alias vinit='vagrant init --minimal'
 alias vhalt='vagrant halt'
 
-
-## pass options to free ## 
-alias meminfo='free -m -l -t'
- 
-## get top process eating memory
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
- 
-## get top process eating cpu ##
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
- 
-## Get server cpu info ##
-alias cpuinfo='lscpu'
- 
-## older system use /proc/cpuinfo ##
-##alias cpuinfo='less /proc/cpuinfo' ##
- 
-## get GPU ram on desktop / laptop## 
-alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-alias meminfo='free -m -l -t'
- 
-## get top process eating memory
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
- 
-## get top process eating cpu ##
-alias pscpu='ps auxf | sort -nr -k 3'
-alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
- 
-## Get server cpu info ##
-alias cpuinfo='lscpu'
-alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-
 # Data science
 alias pydata='/usr/bin/env PYTHONSTARTUP=$DOTFILES_HOME/pydata.py python'
-
-function sslprintcert(){ 
-	openssl s_client -showcerts -connect $1 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'
-}
-
-alias sshpubkey='cat ~/.ssh/id_rsa.pub'
-function sshcopykey(){ ssh $1 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub; }
