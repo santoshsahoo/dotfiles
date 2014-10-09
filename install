@@ -11,5 +11,8 @@ echo "export DOTFILES_HOME='$DOTFILES_HOME'" > ~/.bashrc
 cat $DOTFILES_HOME/bashrc >> ~/.bashrc
 
 ln -s -f $DOTFILES_HOME/vimrc ~/.vimrc
+ln -s -f $DOTFILES_HOME/.gitignore ~/.gitignore
+
+git config --global core.excludesfile '~/.gitignore'
 
 echo "Run '. ~/.bashrc' to update the changes."
