@@ -31,6 +31,8 @@ alias dsstore='find . -name '\''*.DS_Store'\'' -type f -ls -delete'
 alias eachdir='. eachdir'
 alias flush='dscacheutil -flushcache'
 alias fs='stat -f '\''%z bytes'\'''
+alias du='du -h'
+alias dus='du -d 1'
 
 #git stuff
 alias g='git'
@@ -121,7 +123,7 @@ alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias ipof='dig +short'
 alias nsof='dig +short NS'
-alias anyof='dig any'
+alias digany='dig any'
 
 IE9='Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; en-US))'
 alias header='curl -A "$IE9" -I'
@@ -140,7 +142,7 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 alias meminfo='free -m -l -t'
 
 # Openssl
-function sslprintcert(){ 
+function sslgetcert(){ 
 	openssl s_client -showcerts -connect $1 2>/dev/null | sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'
 }
 
@@ -159,3 +161,13 @@ alias vhalt='vagrant halt'
 
 # Data science
 alias pydata='/usr/bin/env PYTHONSTARTUP=$DOTFILES_HOME/pydata.py python'
+
+#webdev
+alias mp='mvn package'
+alias jr='mvn jetty:run'
+
+function swapfile(){
+	if [ "$1" == "" ]; then echo "No filename given"; return; fi
+	if [ "$2" == "" ]; then ext='~'; else ext=$2; fi
+	mv "$1" "$1$ext~" && mv "$1$ext" "$1" && mv "$1$ext~" "$1$ext"
+}
